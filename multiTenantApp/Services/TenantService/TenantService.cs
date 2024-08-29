@@ -8,7 +8,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Sql;
 using Azure;
 using Microsoft.Data.SqlClient;
-using Azure.ResourceManager.Resources;
 
 
 namespace multiTenantApp.Services.TenantService
@@ -16,14 +15,14 @@ namespace multiTenantApp.Services.TenantService
     public class TenantService : ITenantService
     {
 
-        private readonly TenantDbContext _tenantDbContext; // base database context
+        private readonly BaseDbContext _baseDbContext; 
         private readonly IConfiguration _configuration;
         private readonly IServiceProvider _serviceProvider;
         private readonly IWebHostEnvironment _environment;
 
-        public TenantService(TenantDbContext tenantDbContext, IConfiguration configuration, IServiceProvider serviceProvider, IWebHostEnvironment environment)
+        public TenantService(BaseDbContext baseDbContext, IConfiguration configuration, IServiceProvider serviceProvider, IWebHostEnvironment environment)
         {
-            _tenantDbContext = tenantDbContext;
+            _baseDbContext = baseDbContext;
             _configuration = configuration;
             _serviceProvider = serviceProvider;
             _environment = environment;
@@ -50,7 +49,7 @@ namespace multiTenantApp.Services.TenantService
             // create a new tenant database and bring current with any pending migrations from ApplicationDbContext
             try
             {
-                _ = await _tenantDbContext.Tenants.AddAsync(tenant);
+                _ = await _baseDbContext.Tenants.AddAsync(tenant);
 
                 if (request.Isolated == true)
                 {
@@ -115,7 +114,7 @@ namespace multiTenantApp.Services.TenantService
 
 
 
-            _ = await _tenantDbContext.SaveChangesAsync(); // tenant save changes to baseDb
+            _ = await _baseDbContext.SaveChangesAsync(); // save tenant info to baseDb
 
 
             return tenant;

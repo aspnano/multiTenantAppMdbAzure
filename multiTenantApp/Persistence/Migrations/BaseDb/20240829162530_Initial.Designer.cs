@@ -8,10 +8,10 @@ using multiTenantApp.Persistence.Contexts;
 
 #nullable disable
 
-namespace multiTenantApp.Persistence.Migrations.AppDb
+namespace multiTenantApp.Persistence.Migrations.BaseDb
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240828014328_Initial")]
+    [DbContext(typeof(BaseDbContext))]
+    [Migration("20240829162530_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,30 +19,26 @@ namespace multiTenantApp.Persistence.Migrations.AppDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("multiTenantApp.Models.Product", b =>
+            modelBuilder.Entity("multiTenantApp.Models.Tenant", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("ConnectionString")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TenantId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Tenants");
                 });
 #pragma warning restore 612, 618
         }

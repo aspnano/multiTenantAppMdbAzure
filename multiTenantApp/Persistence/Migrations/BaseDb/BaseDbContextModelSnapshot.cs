@@ -7,16 +7,16 @@ using multiTenantApp.Persistence.Contexts;
 
 #nullable disable
 
-namespace multiTenantApp.Persistence.Migrations.TenantDb
+namespace multiTenantApp.Persistence.Migrations.BaseDb
 {
-    [DbContext(typeof(TenantDbContext))]
-    partial class TenantDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BaseDbContext))]
+    partial class BaseDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

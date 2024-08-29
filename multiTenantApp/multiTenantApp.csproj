@@ -31,7 +31,7 @@
 	<ItemGroup>
 		<Folder Include="Persistence\Migrations\" />
 		<Folder Include="Persistence\Migrations\AppDb\" />
-		<Folder Include="Persistence\Migrations\TenantDb\" />
+		<Folder Include="Persistence\Migrations\BaseDb\" />
 	</ItemGroup>
 
 </Project>
