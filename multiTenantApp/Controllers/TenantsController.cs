@@ -17,9 +17,9 @@ namespace multiTenantApp.Controllers
 
         // Create a new tenant
         [HttpPost]
-        public IActionResult Post(CreateTenantRequest request)
+        public async Task<IActionResult> Post(CreateTenantRequest request)
         {
-            var result = _tenantService.CreateTenant(request);
+            var result = await _tenantService.CreateTenant(request);
             return Ok(result);
         }
     }

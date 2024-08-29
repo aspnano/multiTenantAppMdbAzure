@@ -5,6 +5,6 @@ namespace multiTenantApp.Services.TenantService
 {
     public interface ITenantService
     {
-        Tenant CreateTenant(CreateTenantRequest request);
+        Task<Tenant> CreateTenant(CreateTenantRequest request);
     }
 }
